@@ -633,7 +633,8 @@ static E_EEPROM_XMC4_STATUS_t E_EEPROM_XMC4_lInitEraseStateMachine(void)
                 XMC_FLASH_ClearStatus();
                 XMC_FLASH_EraseSector((uint32_t*)sector_start_addr);
 
-                if (XMC_FLASH_GetStatus() != (uint32_t)XMC_FLASH_STATUS_ERASE_STATE)
+                //if (XMC_FLASH_GetStatus() != (uint32_t)XMC_FLASH_STATUS_ERASE_STATE)
+                if ((XMC_FLASH_GetStatus() & FLASH_FSR_ERASE_Msk) != (uint32_t)XMC_FLASH_STATUS_ERASE_STATE)
                 {
                     status = E_EEPROM_XMC4_STATUS_ERASE_ERROR;
                     break;
